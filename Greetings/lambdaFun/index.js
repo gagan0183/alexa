@@ -13,7 +13,11 @@ exports.handler = function(event, context) {
     */
 
     if(request.type === "LaunchRequest") {
-
+        context.succeed(buildResponse({
+            speechText: "Welcome to Greeting skill. Using our skill you can greet your guests.",
+            repromptText: "whom you want to greet? You can say for example, say hello to John",
+            endSession: false
+        }));
     }
     else if(request.type === "IntentRequest") {
 
@@ -25,3 +29,26 @@ exports.handler = function(event, context) {
         context.fail("unknown intent type");
     }
 };
+
+function buildResponse(options) {
+    var response = {
+        version: "1.0",
+        response: {
+            outputSpeech: {
+              type: "PlainText",
+              text: options.speechText
+            },
+            shouldEndSession: options.endSession
+          }
+    };
+
+    if(options.repromptText) {
+        response.response.reprompt = {
+            outputSpeech: {
+                type: "PlainText",
+                text: options.repromptText
+            }
+        };
+    }
+    return response;
+}
