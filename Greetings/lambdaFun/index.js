@@ -14,8 +14,8 @@ exports.handler = function(event, context) {
 
     if(request.type === "LaunchRequest") {
         context.succeed(buildResponse({
-            speechText: "Welcome to Greeting skill. Using our skill you can greet your guests.",
-            repromptText: "whom you want to greet? You can say for example, say hello to John",
+            speechText: "Welcome to Greeting skill. Using our skill you can greet your guests. whom you want to greet?  ",
+            repromptText: "You can say for example, say hello to John",
             endSession: false
         }));
     }
